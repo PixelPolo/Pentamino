@@ -1,4 +1,4 @@
-package shape;
+package shapes;
 
 import geometry.Angle;
 import geometry.Point;
