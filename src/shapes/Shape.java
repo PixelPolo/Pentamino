@@ -14,9 +14,11 @@ public abstract class Shape implements Transformable, Displayable {
 
     // ***** CONSTRUCTOR *****
 
-    protected Shape(Color color) {
+    public Shape(Color color, Point position) {
         this.color = color;
+        this.position = position;
     }
+
 
     // ***** GETTERS AND SETTERS *****
 
@@ -36,6 +38,8 @@ public abstract class Shape implements Transformable, Displayable {
         this.position = position;
     }
 
+    // ***** ABSTRACT GETTERS AND SETTERS *****
+
     public abstract Point getCenter();
 
     public abstract void setCenter(Point center);
@@ -49,6 +53,8 @@ public abstract class Shape implements Transformable, Displayable {
     public void scale(Double factor) {
         scale(getCenter(), factor);
     }
+
+    // ***** ABSTRACT METHODS *****
 
     public abstract boolean contains(Point point);
 

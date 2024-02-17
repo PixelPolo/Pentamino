@@ -16,8 +16,8 @@ public abstract class MatrixShape extends Shape {
 
     // ***** CONSTRUCTOR *****
 
-    protected MatrixShape(Color color, int[][] matrix) {
-        super(color);
+    public MatrixShape(Color color, Point position, int[][] matrix) {
+        super(color, position);
         this.matrix = matrix;
     }
 
@@ -61,23 +61,82 @@ public abstract class MatrixShape extends Shape {
         return false;
     }
 
+    // TODO ... THINK ABOUT ***** SHAPE ROTATIONS *****
+
     @Override
     public void translate(Vector vector) {
         getPosition().translate(vector);
     }
 
-    // TODO ROTATE THE MATRIX
     @Override
     public void rotate(Point center, Angle angle) {
         getPosition().rotate(angle, center);
     }
 
-    // TODO NOT SURE ABOUT THIS ONE
     @Override
     public void scale(Point refPoint, Double factor) {
+        // TODO NOT SURE ABOUT THIS ONE
         TILE_WIDTH *= factor;
         getPosition().scale(factor, refPoint);
     }
+
+    // ***** MATRIX 90 DEGREES ROTATIONS *****
+    // https://www.javatpoint.com/rotate-matrix-by-90-degrees-in-java
+
+    private void checkIfSquareMatrix() {
+        int length = matrix.length;
+        if (length != matrix[0].length) {
+            throw new UnsupportedOperationException(
+                    "Not implemented with a non-square matrix"
+            );
+        }
+    }
+
+    private void transposeMatrix() {
+        checkIfSquareMatrix();
+        int length = matrix.length;
+        for (int i = 0; i < length; i++) {
+            for (int j = i; j < length; j++) {
+                if (i != j) {
+                    int temp = matrix[i][j];
+                    matrix[i][j] = matrix[j][i];
+                    matrix[j][i] = temp;
+                }
+            }
+        }
+    }
+
+    public void reverseColOrder() {
+        int length = matrix.length;
+        for (int i = 0; i < length; i++) {
+            for (int j = 0; j < length / 2; j++) {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[i][length - 1 - j];
+                matrix[i][length - 1 - j] = temp;
+            }
+        }
+    }
+
+    public void reverseRowOrder() {
+        int length = matrix.length;
+        for (int i = 0; i < length / 2; i++) {
+            int[] tempRow = matrix[i];
+            matrix[i] = matrix[length - i - 1];
+            matrix[length - i - 1] = tempRow;
+        }
+    }
+
+    public void rotateMatrixRight() {
+        transposeMatrix();
+        reverseColOrder();
+    }
+
+    public void rotateMatrixLeft() {
+        transposeMatrix();
+        reverseRowOrder();
+    }
+
+    // ***** DISPLAY AND TO STRING *****
 
     @Override
     public void display(Graphics2D graphics2D) {
@@ -99,7 +158,8 @@ public abstract class MatrixShape extends Shape {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("\n").append(this.getClass().getSimpleName()).append("\n");
+        sb.append("\n").append(this.getClass().getSimpleName());
+        sb.append("\n\t").append("Position : ").append(getPosition()).append("\n");
         for (int[] row : matrix) {
             sb.append("\t");
             for (int value : row) {
@@ -107,7 +167,6 @@ public abstract class MatrixShape extends Shape {
             }
             sb.append("\n");
         }
-        sb.append("\n");
         return sb.toString();
     }
 

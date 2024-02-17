@@ -1,12 +1,15 @@
 package shapes;
 
+import geometry.Angle;
+import geometry.Point;
+
 import java.awt.*;
 
 public class Board extends MatrixShape {
 
     // TESTS
     public static void main(String[] args) {
-        Board board = new Board(Color.BLUE);
+        Board board = new Board(Color.BLUE, new Point(0, 0));
         System.out.println(board);
     }
 
@@ -20,12 +23,12 @@ public class Board extends MatrixShape {
         };
     }
 
-    public Board(Color color) {
-        this(color, initMatrix());
+    public Board(Color color, Point position) {
+        this(color, position, initMatrix());
     }
 
-    protected Board(Color color, int[][] matrix) {
-        super(color, matrix);
+    private Board(Color color, Point position, int[][] matrix) {
+        super(color, position, matrix);
     }
 
 }
