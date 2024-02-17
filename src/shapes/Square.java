@@ -78,11 +78,10 @@ public class Square extends Shape implements Displayable {
     @Override
     public void display(Graphics2D graphics2D) {
         graphics2D.setColor(this.getColor());
-        graphics2D.fillRect
-            (
+        graphics2D.fillRect(
                 (int) position.getX(), (int) position.getY(),
                 (int) this.width, (int) this.width
-            );
+        );
     }
 
 }

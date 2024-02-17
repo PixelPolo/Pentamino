@@ -10,6 +10,7 @@ public abstract class Shape implements Transformable, Displayable {
     // ***** FIELDS *****
 
     private Color color;
+    private Point position;
 
     // ***** CONSTRUCTOR *****
 
@@ -25,6 +26,14 @@ public abstract class Shape implements Transformable, Displayable {
 
     public void setColor(Color color) {
         this.color = color;
+    }
+
+    public Point getPosition() {
+        return position;
+    }
+
+    public void setPosition(Point position) {
+        this.position = position;
     }
 
     public abstract Point getCenter();
