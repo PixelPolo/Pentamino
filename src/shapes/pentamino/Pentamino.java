@@ -14,28 +14,6 @@ public class Pentamino extends MatrixShape {
         super(color, position, matrix);
     }
 
-    // ***** METHODS *****
-
-    // TODO BUG HERE WE HAVE TO FIND THE EXACT DIMENSIONS OF THE PENTAMINO
-    public boolean isPositionValid(Board board) {
-
-        double boardX = board.getPosition().getX();
-        double boardY = board.getPosition().getY();
-        int boardWidth = board.getMatrix()[0].length * TILE_WIDTH;
-        int boardHeight = board.getMatrix().length * TILE_WIDTH;
-
-        double pentaminoX = this.getPosition().getX();
-        double pentaminoY = this.getPosition().getY();
-        int pentaminoWidth = this.getMatrix()[0].length * TILE_WIDTH;   // TODO BUG HERE
-        int pentaminoHeight = this.getMatrix().length * TILE_WIDTH;     // TODO BUG HERE
-
-        boolean left = pentaminoX >= boardX;
-        boolean right = pentaminoX + pentaminoWidth <= boardX + boardWidth;
-        boolean top = pentaminoY >= boardY;
-        boolean bottom = pentaminoY + pentaminoHeight <= boardY + boardHeight;
-        return left && right && top && bottom;
-    }
-
     // ***** F *****
 
     private static int[][] initF() {
@@ -70,9 +48,10 @@ public class Pentamino extends MatrixShape {
 
     private static int[][] initL() {
         return new int[][]{
-                {1, 9, 9},
-                {1, 9, 9},
-                {1, 1, 9}
+                {9, 1, 9, 9},
+                {9, 1, 9, 9},
+                {9, 1, 9, 9},
+                {9, 1, 1, 9}
         };
     }
 

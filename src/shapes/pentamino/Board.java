@@ -3,34 +3,90 @@ package shapes.pentamino;
 import geometry.Point;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Board extends MatrixShape {
 
-    private static int[][] initMatrix() {
-        return new int[][]{
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
-        };
-    }
+    // ***** FIELDS *****
+
+    private int rows;
+    private int cols;
 
     // ***** CONSTRUCTOR *****
 
     public Board(Color color, Point position) {
-        this(color, position, initMatrix());
+        this(color, position, new int[5][12]);
+        rows = 5;
+        cols = 12;
     }
 
     private Board(Color color, Point position, int[][] matrix) {
         super(color, position, matrix);
     }
 
+    // ***** GETTERS *****
+
+    public int getRows() {
+        return rows;
+    }
+
+    public void setRows(int rows) {
+        this.rows = rows;
+    }
+
+    public int getCols() {
+        return cols;
+    }
+
+    public void setCols(int cols) {
+        this.cols = cols;
+    }
+
     // ***** METHODS *****
 
-    // TODO ADD PENTAMINO TO THE BOARD FOR WIN CONDITIONS
-    public void addPentamino(Pentamino pentamino) {
+    // TODO IMPROVE ALGORITHM RUNTIME
 
+    public boolean boardContainsPentamino(Pentamino pentamino) {
+        boolean boardContainsPentamino = true;
+        int n = pentamino.getMatrix().length;
+        for (int row = 0; row < n; row++) {
+            for (int col = 0; col < n; col++) {
+                if (pentamino.getMatrix()[row][col] == 1) {
+                    // Get the coordinates of the colored parts ...
+                    int x = (int) (pentamino.getPosition().getX() + col * TILE_WIDTH + TILE_WIDTH / 2);
+                    int y = (int) (pentamino.getPosition().getY() + row * TILE_WIDTH + TILE_WIDTH / 2);
+                    // Check if the colored parts are inside the board
+                    if (!this.contains(new Point(x, y))) {
+                        boardContainsPentamino = false;
+                    }
+                }
+            }
+        }
+        return boardContainsPentamino;
     }
+
+    public void addPentamino(ArrayList<Pentamino> pentaminos) {
+        resetBoard();
+        for (Pentamino pentamino : pentaminos) {
+            if (boardContainsPentamino(pentamino)) {
+                int n = pentamino.getMatrix().length;
+                int deltaX = (int) ((pentamino.getPosition().getX() - getPosition().getX()) / TILE_WIDTH);
+                int deltaY = (int) ((pentamino.getPosition().getY() - getPosition().getY()) / TILE_WIDTH);
+                for (int row = 0; row < n; row++) {
+                    for (int col = 0; col < n; col++) {
+                        if (pentamino.getMatrix()[row][col] == 1) {
+                            getMatrix()[deltaY + row][deltaX + col] += 1;
+                        }
+                    }
+                }
+            }
+        }
+        System.out.println(this);
+    }
+
+    public void resetBoard() {
+        setMatrix(new int[rows][cols]);
+    }
+
 
 }

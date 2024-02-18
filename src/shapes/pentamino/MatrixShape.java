@@ -51,17 +51,19 @@ public abstract class MatrixShape extends Shape {
 
     // ***** METHODS *****
 
-    // TODO BUG HERE (Contains doesn't work well :))
     @Override
     public boolean contains(Point point) {
-        int colIndex = (int) ((point.getX() - getPosition().getX()) / TILE_WIDTH);
-        int rowIndex = (int) ((point.getY() - getPosition().getY()) / TILE_WIDTH);
-        if (rowIndex >= 0 && rowIndex < matrix.length && colIndex >= 0 && colIndex < matrix[0].length) {
-            return matrix[rowIndex][colIndex] != 9;
+        int deltaX = (int) (point.getX() - getPosition().getX());
+        int deltaY = (int) (point.getY() - getPosition().getY());
+        if (deltaX >= 0 && deltaY >= 0) {
+            int colIndex = deltaX / TILE_WIDTH;
+            int rowIndex = deltaY / TILE_WIDTH;
+            if (rowIndex >= 0 && rowIndex < matrix.length && colIndex >= 0 && colIndex < matrix[0].length) {
+                return matrix[rowIndex][colIndex] != 9;
+            }
         }
         return false;
     }
-
 
     // TODO THINK ABOUT SHAPE ROTATIONS
 
@@ -141,27 +143,26 @@ public abstract class MatrixShape extends Shape {
     @Override
     public void display(Graphics2D graphics2D) {
         int color;
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[i].length; j++) {
-                color = matrix[i][j];
+        for (int row = 0; row < matrix.length; row++) {
+            for (int col = 0; col < matrix[row].length; col++) {
+                color = matrix[row][col];
                 if (color == 1) {
                     graphics2D.setColor(this.getColor());
-                    graphics2D.fillRect(
-                            (int) getPosition().getX() + j * TILE_WIDTH,
-                            (int) getPosition().getY() + i * TILE_WIDTH,
-                            TILE_WIDTH, TILE_WIDTH
-                    );
+                    drawRect(row, col, graphics2D);
                 } else if (color == 0) {
                     graphics2D.setColor(Color.BLACK);
-                    graphics2D.fillRect(
-                            (int) getPosition().getX() + j * TILE_WIDTH,
-                            (int) getPosition().getY() + i * TILE_WIDTH,
-                            TILE_WIDTH, TILE_WIDTH
-                    );
+                    drawRect(row, col, graphics2D);
                 }
-
             }
         }
+    }
+
+    private void drawRect(int row, int col, Graphics2D graphics2D) {
+        graphics2D.fillRect(
+                (int) getPosition().getX() + col * TILE_WIDTH,
+                (int) getPosition().getY() + row * TILE_WIDTH,
+                TILE_WIDTH, TILE_WIDTH
+        );
     }
 
     @Override

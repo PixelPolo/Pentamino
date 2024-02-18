@@ -15,37 +15,36 @@ public class Model extends Observable {
 
     private final Board board;
     private final ArrayList<Pentamino> pentaminos;
-    private final Pentamino F, I, L, N, P, T, U, V, W, X, Y, Z;
 
     // ***** CONSTRUCTOR *****
 
     public Model() {
         board = new Board(Color.BLACK, new Point(50, 50));
         pentaminos = new ArrayList<>();
-        F = Pentamino.F(new Color(221, 189, 155), new Point(50, 350));
-        pentaminos.add(F);
-        I = Pentamino.I(new Color(238, 171, 172), new Point(250, 350));
-        pentaminos.add(I);
-        L = Pentamino.L(new Color(205, 205, 137), new Point(450, 350));
-        pentaminos.add(L);
-        N = Pentamino.N(new Color(172, 239, 172), new Point(550, 350));
-        pentaminos.add(N);
-        P = Pentamino.P(new Color(188, 222, 154), new Point(700, 350));
-        pentaminos.add(P);
-        T = Pentamino.T(new Color(154, 222, 189), new Point(900, 350));
-        pentaminos.add(T);
-        U = Pentamino.U(new Color(137, 205, 205), new Point(50, 650));
-        pentaminos.add(U);
-        V = Pentamino.V(new Color(154, 188, 222), new Point(250, 650));
-        pentaminos.add(V);
-        W = Pentamino.W(new Color(172, 172, 239), new Point(450, 650));
-        pentaminos.add(W);
-        X = Pentamino.X(new Color(188, 155, 221), new Point(650, 650));
-        pentaminos.add(X);
-        Y = Pentamino.Y(new Color(205, 137, 205), new Point(800, 600));
-        pentaminos.add(Y);
-        Z = Pentamino.Z(new Color(222, 154, 189), new Point(1000, 650));
-        pentaminos.add(Z);
+        Pentamino f = Pentamino.F(new Color(221, 189, 155), new Point(50, 400));
+        pentaminos.add(f);
+        Pentamino i = Pentamino.I(new Color(238, 171, 172), new Point(250, 400));
+        pentaminos.add(i);
+        Pentamino l = Pentamino.L(new Color(205, 205, 137), new Point(400, 400));
+        pentaminos.add(l);
+        Pentamino n = Pentamino.N(new Color(172, 239, 172), new Point(550, 400));
+        pentaminos.add(n);
+        Pentamino p = Pentamino.P(new Color(188, 222, 154), new Point(700, 400));
+        pentaminos.add(p);
+        Pentamino t = Pentamino.T(new Color(154, 222, 189), new Point(900, 400));
+        pentaminos.add(t);
+        Pentamino u = Pentamino.U(new Color(137, 205, 205), new Point(50, 700));
+        pentaminos.add(u);
+        Pentamino v = Pentamino.V(new Color(154, 188, 222), new Point(250, 700));
+        pentaminos.add(v);
+        Pentamino w = Pentamino.W(new Color(172, 172, 239), new Point(450, 700));
+        pentaminos.add(w);
+        Pentamino x = Pentamino.X(new Color(188, 155, 221), new Point(650, 700));
+        pentaminos.add(x);
+        Pentamino y = Pentamino.Y(new Color(205, 137, 205), new Point(800, 650));
+        pentaminos.add(y);
+        Pentamino z = Pentamino.Z(new Color(222, 154, 189), new Point(1000, 700));
+        pentaminos.add(z);
     }
 
     // ***** GETTERS *****
@@ -89,8 +88,22 @@ public class Model extends Observable {
         notifyObservers();
     }
 
-    public void flipPentamino() {
+    public void flipPentaminoHorizontally() {
         getFrontPentamino().reverseColOrder();
+        setChanged();
+        notifyObservers();
+    }
+
+    public void flipPentaminoVertically() {
+        getFrontPentamino().reverseRowOrder();
+        setChanged();
+        notifyObservers();
+    }
+
+    public void modifyBoard(int rows, int cols) {
+        getBoard().setRows(rows);
+        getBoard().setCols(cols);
+        getBoard().resetBoard();
         setChanged();
         notifyObservers();
     }

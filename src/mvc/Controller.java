@@ -25,9 +25,14 @@ public class Controller {
         this.view = view;
         // Action Listener
         ActionListener actionListener = new LocalActionListener();
+        view.getBoardOne().addActionListener(actionListener);
+        view.getBoardTwo().addActionListener(actionListener);
+        view.getBoardThree().addActionListener(actionListener);
+        view.getBoardFour().addActionListener(actionListener);
         view.getRotateRightItem().addActionListener(actionListener);
         view.getRotateLeftItem().addActionListener(actionListener);
-        view.getFlipItem().addActionListener(actionListener);
+        view.getFlipHorItem().addActionListener(actionListener);
+        view.getFlipVerItem().addActionListener(actionListener);
         // Mouse listener
         MouseAdapter mouseAdapter = new LocalMouseListener();
         view.addMouseListener(mouseAdapter);
@@ -35,7 +40,23 @@ public class Controller {
 
     }
 
-    // TODO CHECK WIN
+    // ***** METHODS *****
+
+    private void checkWin() {
+        boolean win = true;
+        int boardHeight = model.getBoard().getMatrix().length;
+        int boardWidth = model.getBoard().getMatrix()[0].length;
+        for (int row = 0; row < boardHeight; row++) {
+            for (int col = 0; col < boardWidth; col++) {
+                if (model.getBoard().getMatrix()[row][col] != 1) {
+                    win = false;
+                    break;
+                }
+            }
+        }
+        if (win) view.setBackground(View.WIN_COLOR);
+        else view.setBackground(View.BACKGROUND_COLOR);
+    }
 
     // ***** ACTION LISTENER FOR POPUPMENU *****
 
@@ -44,7 +65,13 @@ public class Controller {
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == view.getRotateRightItem()) model.rotateRightPentamino();
             else if (e.getSource() == view.getRotateLeftItem()) model.rotateLeftPentamino();
-            else if (e.getSource() == view.getFlipItem()) model.flipPentamino();
+            else if (e.getSource() == view.getFlipHorItem()) model.flipPentaminoHorizontally();
+            else if (e.getSource() == view.getFlipVerItem()) model.flipPentaminoVertically();
+            else if (e.getSource() == view.getBoardOne()) model.modifyBoard(6, 10);
+            else if (e.getSource() == view.getBoardTwo()) model.modifyBoard(5, 12);
+            else if (e.getSource() == view.getBoardThree()) model.modifyBoard(4, 15);
+            else if (e.getSource() == view.getBoardFour()) model.modifyBoard(3, 20);
+            checkWin();
         }
     }
 
@@ -97,6 +124,8 @@ public class Controller {
         @Override
         public void mouseReleased(MouseEvent e) {
             super.mouseReleased(e);
+            model.getBoard().addPentamino(model.getPentaminos());
+            checkWin();
         }
 
     }

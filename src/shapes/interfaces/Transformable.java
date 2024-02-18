@@ -6,8 +6,10 @@ import geometry.Vector;
 
 public interface Transformable {
 
-    public void translate(Vector vector);
-    public void rotate(Point center, Angle angle);
-    public void scale(Point refPoint, Double factor);
+    void translate(Vector vector);
+
+    void rotate(Point center, Angle angle);
+
+    void scale(Point refPoint, Double factor);
 
 }

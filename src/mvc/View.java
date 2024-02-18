@@ -16,10 +16,16 @@ public class View extends JPanel implements Observer, Runnable {
 
     private final Model model;
 
+    private JButton boardOne;
+    private JButton boardTwo;
+    private JButton boardThree;
+    private JButton boardFour;
+
     private JPopupMenu jPopupMenu;
     private JMenuItem rotateRightItem;
     private JMenuItem rotateLeftItem;
-    private JMenuItem flipItem;
+    private JMenuItem flipHorItem;
+    private JMenuItem flipVerItem;
 
     private final Thread thread;
     private boolean dirty;
@@ -33,7 +39,8 @@ public class View extends JPanel implements Observer, Runnable {
         this.setDoubleBuffered(true); // Better rendering perfs
         this.setBackground(BACKGROUND_COLOR);
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
-        // PopupMenu
+        // Buttons and PopupMenu
+        createBtn();
         createPopupMenu();
         // Graphics adjustment
         this.setFocusable(true);
@@ -44,6 +51,23 @@ public class View extends JPanel implements Observer, Runnable {
     }
 
     // ***** GETTERS *****
+
+
+    public JButton getBoardOne() {
+        return boardOne;
+    }
+
+    public JButton getBoardTwo() {
+        return boardTwo;
+    }
+
+    public JButton getBoardThree() {
+        return boardThree;
+    }
+
+    public JButton getBoardFour() {
+        return boardFour;
+    }
 
     public JPopupMenu getjPopupMenu() {
         return jPopupMenu;
@@ -57,8 +81,12 @@ public class View extends JPanel implements Observer, Runnable {
         return rotateLeftItem;
     }
 
-    public JMenuItem getFlipItem() {
-        return flipItem;
+    public JMenuItem getFlipHorItem() {
+        return flipHorItem;
+    }
+
+    public JMenuItem getFlipVerItem() {
+        return flipVerItem;
     }
 
     // ***** METHODS *****
@@ -93,14 +121,28 @@ public class View extends JPanel implements Observer, Runnable {
         }
     }
 
+    private void createBtn() {
+        boardOne = new JButton("06 x 10");
+        boardTwo = new JButton("05 x 12");
+        boardThree = new JButton("04 x 15");
+        boardFour = new JButton("3 x 20");
+        this.add(boardOne);
+        this.add(boardTwo);
+        this.add(boardThree);
+        this.add(boardFour);
+    }
+
     private void createPopupMenu() {
         jPopupMenu = new JPopupMenu();
         rotateRightItem = new JMenuItem("Rotate right");
         rotateLeftItem = new JMenuItem("Rotate left");
-        flipItem = new JMenuItem("Flip");
+        flipHorItem = new JMenuItem("Flip horizontally");
+        flipVerItem = new JMenuItem("Flip vertically");
         jPopupMenu.add(rotateRightItem);
         jPopupMenu.add(rotateLeftItem);
-        jPopupMenu.add(flipItem);
+        jPopupMenu.add(flipHorItem);
+        jPopupMenu.add(flipVerItem);
         this.add(jPopupMenu);
     }
+
 }
