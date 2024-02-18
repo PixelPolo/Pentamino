@@ -2,6 +2,8 @@ package shapes;
 
 import geometry.Angle;
 import geometry.Point;
+import shapes.interfaces.Displayable;
+import shapes.interfaces.Transformable;
 
 import java.awt.*;
 

@@ -1,8 +1,9 @@
-package shapes;
+package shapes.pentamino;
 
 import geometry.Angle;
 import geometry.Point;
 import geometry.Vector;
+import shapes.Shape;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -12,7 +13,7 @@ public abstract class MatrixShape extends Shape {
     // ***** FIELDS *****
 
     private int[][] matrix;
-    private int TILE_WIDTH = 10;
+    public static int TILE_WIDTH = 50;
 
     // ***** CONSTRUCTOR *****
 
@@ -42,26 +43,27 @@ public abstract class MatrixShape extends Shape {
     @Override
     public void setCenter(Point center) {
         setPosition(new Point(
-                    (int) (center.getX() + matrix.length / 2),
-                    (int) (center.getY() + matrix[0].length / 2)
+                        (int) (center.getX() + matrix.length / 2),
+                        (int) (center.getY() + matrix[0].length / 2)
                 )
         );
     }
 
     // ***** METHODS *****
 
+    // TODO BUG HERE (Contains doesn't work well :))
     @Override
     public boolean contains(Point point) {
-        int colIndex = (int) point.getX() / TILE_WIDTH;
-        int rowIndex = (int) point.getY() / TILE_WIDTH;
-        if (colIndex >= 0 && colIndex < matrix.length &&
-                rowIndex >= 0 && rowIndex < matrix[0].length) {
-            return matrix[rowIndex][colIndex] != 0;
+        int colIndex = (int) ((point.getX() - getPosition().getX()) / TILE_WIDTH);
+        int rowIndex = (int) ((point.getY() - getPosition().getY()) / TILE_WIDTH);
+        if (rowIndex >= 0 && rowIndex < matrix.length && colIndex >= 0 && colIndex < matrix[0].length) {
+            return matrix[rowIndex][colIndex] != 9;
         }
         return false;
     }
 
-    // TODO ... THINK ABOUT ***** SHAPE ROTATIONS *****
+
+    // TODO THINK ABOUT SHAPE ROTATIONS
 
     @Override
     public void translate(Vector vector) {
@@ -75,8 +77,6 @@ public abstract class MatrixShape extends Shape {
 
     @Override
     public void scale(Point refPoint, Double factor) {
-        // TODO NOT SURE ABOUT THIS ONE
-        TILE_WIDTH *= factor;
         getPosition().scale(factor, refPoint);
     }
 
@@ -144,13 +144,22 @@ public abstract class MatrixShape extends Shape {
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[i].length; j++) {
                 color = matrix[i][j];
-                if (color == 1) graphics2D.setColor(this.getColor());
-                else graphics2D.setColor(Color.BLACK);
-                graphics2D.fillRect(
-                        (int) getPosition().getX() + i * TILE_WIDTH,
-                        (int) getPosition().getY() + j * TILE_WIDTH,
-                        TILE_WIDTH, TILE_WIDTH
-                );
+                if (color == 1) {
+                    graphics2D.setColor(this.getColor());
+                    graphics2D.fillRect(
+                            (int) getPosition().getX() + j * TILE_WIDTH,
+                            (int) getPosition().getY() + i * TILE_WIDTH,
+                            TILE_WIDTH, TILE_WIDTH
+                    );
+                } else if (color == 0) {
+                    graphics2D.setColor(Color.BLACK);
+                    graphics2D.fillRect(
+                            (int) getPosition().getX() + j * TILE_WIDTH,
+                            (int) getPosition().getY() + i * TILE_WIDTH,
+                            TILE_WIDTH, TILE_WIDTH
+                    );
+                }
+
             }
         }
     }
