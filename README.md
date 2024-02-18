@@ -1,3 +1,3 @@
 # Pentamino Game
 
-Project for Fribourg University.
+Project for the University of Fribourg.
