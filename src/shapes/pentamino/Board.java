@@ -47,7 +47,6 @@ public class Board extends MatrixShape {
     // TODO IMPROVE ALGORITHM RUNTIME
 
     public boolean boardContainsPentamino(Pentamino pentamino) {
-        boolean boardContainsPentamino = true;
         int n = pentamino.getMatrix().length;
         for (int row = 0; row < n; row++) {
             for (int col = 0; col < n; col++) {
@@ -57,12 +56,12 @@ public class Board extends MatrixShape {
                     int y = (int) (pentamino.getPosition().getY() + row * TILE_WIDTH + TILE_WIDTH / 2);
                     // Check if the colored parts are inside the board
                     if (!this.contains(new Point(x, y))) {
-                        boardContainsPentamino = false;
+                        return false;
                     }
                 }
             }
         }
-        return boardContainsPentamino;
+        return true;
     }
 
     public void addPentamino(ArrayList<Pentamino> pentaminos) {
