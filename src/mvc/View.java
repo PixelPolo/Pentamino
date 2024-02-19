@@ -52,7 +52,6 @@ public class View extends JPanel implements Observer, Runnable {
 
     // ***** GETTERS *****
 
-
     public JButton getBoardOne() {
         return boardOne;
     }

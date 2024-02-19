@@ -83,6 +83,7 @@ public abstract class MatrixShape extends Shape {
     }
 
     // ***** MATRIX 90 DEGREES ROTATIONS *****
+
     // https://www.javatpoint.com/rotate-matrix-by-90-degrees-in-java
 
     private void checkIfSquareMatrix() {

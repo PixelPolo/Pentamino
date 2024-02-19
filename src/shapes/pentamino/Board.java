@@ -88,5 +88,4 @@ public class Board extends MatrixShape {
         setMatrix(new int[rows][cols]);
     }
 
-
 }

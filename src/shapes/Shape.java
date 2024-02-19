@@ -21,7 +21,6 @@ public abstract class Shape implements Transformable, Displayable {
         this.position = position;
     }
 
-
     // ***** GETTERS AND SETTERS *****
 
     public Color getColor() {
