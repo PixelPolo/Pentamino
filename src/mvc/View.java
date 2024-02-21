@@ -1,5 +1,8 @@
 package mvc;
 
+import shapes.pentamino.Board;
+import shapes.pentamino.MatrixShape;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.Observable;
@@ -9,8 +12,9 @@ public class View extends JPanel implements Observer, Runnable {
 
     // ***** FIELDS *****
 
-    public static final int WIDTH = 1200;
-    public static final int HEIGHT = 900;
+    public static final int TILE_WIDTH = 40;
+    public static final int WIDTH = 24 * View.TILE_WIDTH;
+    public static final int HEIGHT = 17 * View.TILE_WIDTH;
     public static final Color BACKGROUND_COLOR = Color.WHITE;
     public static final Color WIN_COLOR = Color.BLACK;
 

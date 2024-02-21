@@ -97,6 +97,7 @@ public class Controller {
                     selectedPentamino = null;
                 }
             }
+            checkWin();
         }
 
         @Override
@@ -105,7 +106,7 @@ public class Controller {
                 // Translating the piece
                 int dx = 0;
                 int dy = 0;
-                int step = MatrixShape.TILE_WIDTH;
+                int step = View.TILE_WIDTH;
                 dx += (int) (e.getX() - mousePosOnClick.getX());
                 dy += (int) (e.getY() - mousePosOnClick.getY());
                 if (Math.abs(dx) > step || Math.abs(dy) > step) {

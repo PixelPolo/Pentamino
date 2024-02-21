@@ -3,6 +3,7 @@ package shapes.pentamino;
 import geometry.Angle;
 import geometry.Point;
 import geometry.Vector;
+import mvc.View;
 import shapes.Shape;
 
 import java.awt.*;
@@ -13,7 +14,6 @@ public abstract class MatrixShape extends Shape {
     // ***** FIELDS *****
 
     private int[][] matrix;
-    public static int TILE_WIDTH = 50;
 
     // ***** CONSTRUCTOR *****
 
@@ -56,8 +56,8 @@ public abstract class MatrixShape extends Shape {
         int deltaX = (int) (point.getX() - getPosition().getX());
         int deltaY = (int) (point.getY() - getPosition().getY());
         if (deltaX >= 0 && deltaY >= 0) {
-            int colIndex = deltaX / TILE_WIDTH;
-            int rowIndex = deltaY / TILE_WIDTH;
+            int colIndex = deltaX / View.TILE_WIDTH;
+            int rowIndex = deltaY / View.TILE_WIDTH;
             if (rowIndex >= 0 && rowIndex < matrix.length && colIndex >= 0 && colIndex < matrix[0].length) {
                 return matrix[rowIndex][colIndex] != 9;
             }
@@ -160,9 +160,9 @@ public abstract class MatrixShape extends Shape {
 
     private void drawRect(int row, int col, Graphics2D graphics2D) {
         graphics2D.fillRect(
-                (int) getPosition().getX() + col * TILE_WIDTH,
-                (int) getPosition().getY() + row * TILE_WIDTH,
-                TILE_WIDTH, TILE_WIDTH
+                (int) getPosition().getX() + col * View.TILE_WIDTH,
+                (int) getPosition().getY() + row * View.TILE_WIDTH,
+                View.TILE_WIDTH, View.TILE_WIDTH
         );
     }
 
