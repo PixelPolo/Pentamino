@@ -14,7 +14,7 @@ public class View extends JPanel implements Observer, Runnable {
 
     public static final int TILE_WIDTH = 40;
     public static final int WIDTH = 24 * View.TILE_WIDTH;
-    public static final int HEIGHT = 17 * View.TILE_WIDTH;
+    public static final int HEIGHT = 20 * View.TILE_WIDTH;
     public static final Color BACKGROUND_COLOR = Color.WHITE;
     public static final Color WIN_COLOR = Color.BLACK;
 

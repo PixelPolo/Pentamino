@@ -20,31 +20,31 @@ public class Model extends Observable {
 
     public Model() {
         int tile = View.TILE_WIDTH;
-        board = new Board(Color.BLACK, new Point(tile, tile));
+        board = new Board(Color.BLACK, new Point(2 * tile, 2 * tile));
         pentaminos = new ArrayList<>();
-        Pentamino f = Pentamino.F(new Color(221, 189, 155), new Point(tile, 7 * tile));
+        Pentamino f = Pentamino.F(new Color(221, 189, 155), new Point(tile, 9 * tile));
         pentaminos.add(f);
-        Pentamino i = Pentamino.I(new Color(238, 171, 172), new Point(5 * tile, 7 * tile));
+        Pentamino i = Pentamino.I(new Color(238, 171, 172), new Point(5 * tile, 9 * tile));
         pentaminos.add(i);
-        Pentamino l = Pentamino.L(new Color(205, 205, 137), new Point(8 * tile, 7 * tile));
+        Pentamino l = Pentamino.L(new Color(205, 205, 137), new Point(8 * tile, 9 * tile));
         pentaminos.add(l);
-        Pentamino n = Pentamino.N(new Color(172, 239, 172), new Point(11 * tile, 7 * tile));
+        Pentamino n = Pentamino.N(new Color(172, 239, 172), new Point(11 * tile, 9 * tile));
         pentaminos.add(n);
-        Pentamino p = Pentamino.P(new Color(188, 222, 154), new Point(14 * tile, 7 * tile));
+        Pentamino p = Pentamino.P(new Color(188, 222, 154), new Point(14 * tile, 9 * tile));
         pentaminos.add(p);
-        Pentamino t = Pentamino.T(new Color(154, 222, 189), new Point(18 * tile, 7 * tile));
+        Pentamino t = Pentamino.T(new Color(154, 222, 189), new Point(18 * tile, 9 * tile));
         pentaminos.add(t);
-        Pentamino u = Pentamino.U(new Color(137, 205, 205), new Point(tile, 13 * tile));
+        Pentamino u = Pentamino.U(new Color(137, 205, 205), new Point(tile, 15 * tile));
         pentaminos.add(u);
-        Pentamino v = Pentamino.V(new Color(154, 188, 222), new Point(5 * tile, 13 * tile));
+        Pentamino v = Pentamino.V(new Color(154, 188, 222), new Point(5 * tile, 15 * tile));
         pentaminos.add(v);
-        Pentamino w = Pentamino.W(new Color(172, 172, 239), new Point(9 * tile, 13 * tile));
+        Pentamino w = Pentamino.W(new Color(172, 172, 239), new Point(9 * tile, 15 * tile));
         pentaminos.add(w);
-        Pentamino x = Pentamino.X(new Color(188, 155, 221), new Point(13 * tile, 13 * tile));
+        Pentamino x = Pentamino.X(new Color(188, 155, 221), new Point(13 * tile, 15 * tile));
         pentaminos.add(x);
-        Pentamino y = Pentamino.Y(new Color(205, 137, 205), new Point(16 * tile, 12 * tile));
+        Pentamino y = Pentamino.Y(new Color(205, 137, 205), new Point(16 * tile, 14 * tile));
         pentaminos.add(y);
-        Pentamino z = Pentamino.Z(new Color(222, 154, 189), new Point(20 * tile, 13 * tile));
+        Pentamino z = Pentamino.Z(new Color(222, 154, 189), new Point(20 * tile, 15 * tile));
         pentaminos.add(z);
     }
 
